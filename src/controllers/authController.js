@@ -1,6 +1,7 @@
-const { User } = require("../../models");
+const { User, PurchasesBook, Book } = require("../../models");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
+
 
 
 async function login(req, res, next) {
@@ -17,9 +18,11 @@ async function login(req, res, next) {
           status: "success",
           data:{
             user:{
+              id:rslt.id,
               email:rslt.email,
               fullName:rslt.fullName,
               status:rslt.status,
+              avatar:rslt.avatar,
               token:generateToken({ 
                 id:rslt.id,
                 email:rslt.email,
@@ -65,9 +68,11 @@ async function register(req, res, next) {
       status: "success",
       data:{
         user:{
+          id:rslt.id,
           email:rslt.email,
           fullName:rslt.fullName,
           status:rslt.status,
+          avatar:null,
           token:generateToken({ 
             id:rslt.id,
             email:rslt.email,
@@ -87,10 +92,30 @@ async function register(req, res, next) {
   }
 }
 
+async function getProfile(req,res,next){
+  try {
+   const Profil = await User.findOne({where:{id:req.user.id}, 
+    include:[{model:PurchasesBook,include:[{model:Book , attributes: { exclude: ["updatedAt","bookAttachment", "createdAt"] }}]}],
+    attributes: { exclude: ["updatedAt","password","createdAt"] } });
+
+    return res.json({
+      status: "success",
+      data: {Profil},
+    });
+
+  } catch (err) {
+    console.log("function update err =>", err);
+    return res.json({
+      status: "error",
+      message: "server err",
+    });
+  }
+}
+
 
 async function update(req, res, next) {
   try {
-
+    
 
   } catch (err) {
     console.log("function update err =>", err);
@@ -113,4 +138,4 @@ async function update(req, res, next) {
   );
 }
 
-module.exports = { update,login,register };
+module.exports = { update,login,register ,getProfile};

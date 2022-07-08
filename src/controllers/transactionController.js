@@ -20,7 +20,7 @@ const { User,Transaction ,Purchase,Book,PurchasesBook } = require("../../models"
 
     return res.json({
       status: "success",
-      data:transactions
+      data:{transactions}
     });
   
     } catch (err) {
@@ -177,7 +177,8 @@ const updateTransaction = async (status, attachment, transactionId) => {
   if(status === "Approve"){
     const transaction = await Transaction.findOne({where:{id:transactionId} ,include:[{model:Purchase}]});
     const iduser= transaction.userId;
-    const book = transaction.Purchase;
+    const book = transaction.Purchases;
+    
     book.forEach(e => PurchasesBook.create({UserId:iduser,BookId:e.BookId}) );
   }
 

@@ -11,6 +11,7 @@ const io = new Server(httpServer, { cors: {origin: '*' } });
 const index_route = require('./src/routes/index');
 const sequelize = require('./config/db_connection');
 const index = require('./models/index');
+const {PurchasesBook}= require('./models/index');
 
 /**
  *    +++++++++++++++   cors & header    +++++++++++++++
@@ -63,7 +64,7 @@ app.use('/',index_route);
        * Syncronize the Post model.
        */
       await sequelize.sync();
-      // await transaction.sync();
+      // await PurchasesBook.sync({force:true});
     } catch (error) {
       console.error('Unable to connect to the database:', error);
     }

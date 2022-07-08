@@ -1,4 +1,4 @@
-const { Book } = require("../../models");
+const { Book, PurchasesBook } = require("../../models");
 
 /**
  * GET all data 
@@ -82,6 +82,27 @@ const { Book } = require("../../models");
   }
   
   
+  async function download(req,res,next){
+    const mybook =  await PurchasesBook.findOne({where:{BookId:req.params.book,UserId:req.params.id}});
+    if(mybook !== null){
+     const book= await Book.findOne({where:{id:req.params.book}});
+     if(book === null){
+      return res.json({
+        status: "error",
+        message: "not found",
+      });
+     }
+     const file = `${__dirname}/../../public/upload/${book.bookAttachment}`;
+     res.download(file);
+    }else{
+      return res.json({
+        status: "error",
+        message: "not found",
+      });
+    }
+
+   }
+  
   /**
    * Update one data by id 
    * @param {object} req => get all data from request 
@@ -123,4 +144,4 @@ const { Book } = require("../../models");
   }
   
   
-  module.exports={getAll,getOne,insert,update,destroy};
+  module.exports={getAll,getOne,insert,update,destroy,download};

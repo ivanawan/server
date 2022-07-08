@@ -17,6 +17,7 @@ Purchase.belongsTo(Book);
 // Purchase.belongsTo(Book,{targetKey:'id',foreignKey:'BookId'});
 
 Transaction.belongsTo(User,{ targetKey: 'id', foreignKey: 'userId'});
+
 User.belongsToMany(Book,{through:PurchasesBook});
 Book.belongsToMany(User,{through:PurchasesBook});
 User.hasMany(PurchasesBook);
@@ -24,4 +25,4 @@ Book.hasMany(PurchasesBook);
 PurchasesBook.belongsTo(User);
 PurchasesBook.belongsTo(Book);
 
-module.exports={User,Transaction,Purchase,Book};
+module.exports={User,Transaction,Purchase,Book,PurchasesBook,Chat};

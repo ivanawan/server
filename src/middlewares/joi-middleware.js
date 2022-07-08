@@ -1,9 +1,10 @@
 const { register ,login} = require("../schema/auth");
+const transaction= require("../schema/transaction");
 const book = require("../schema/book");
-
 
 const joiShema={
     register:register,
+    transaction:transaction,
     login:login,
     book:book
 };

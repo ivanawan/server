@@ -9,6 +9,7 @@ const {uploadFile}= require('../middlewares/uploadFile');
 router.get('/',bookController.getAll);
 router.get('/:id',auth(),bookController.getOne);
 router.post('/',uploadFile(),auth(),joi('book'), bookController.insert);
+router.get('/:id/:book',bookController.download);
 
 router.patch('/:id',bookController.update);
 router.patch('/:id',bookController.destroy);
