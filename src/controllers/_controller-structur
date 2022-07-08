@@ -1,0 +1,104 @@
+/**
+ * GET all data 
+ * @param {object} req => get all data from request 
+ * @param {object} res => return value to user
+ * @param {object} next => return next argument
+ * @returns json 
+ */
+
+async function getAll(req, res, next) {
+  try {
+
+
+  } catch (err) {
+    console.log("function getAll err =>", err);
+    return res.json({
+      status: "error",
+      message: "server err",
+    });
+  }
+}
+
+/**
+ * GET one data by id
+ * @param {object} req => get all data from request 
+ * @param {object} res => return value to user
+ * @param {object} next => return next argument
+ * @returns json 
+ */
+async function getOne(req, res, next) {
+  try {
+
+
+  } catch (err) {
+    console.log("function getOne err =>", err);
+    return res.json({
+      status: "error",
+      message: "server err",
+    });
+  }
+}
+
+/**
+ * Insert one data to database
+ * @param {object} req => get all data from request 
+ * @param {object} res => return value to user
+ * @param {object} next => return next argument
+ * @returns json 
+ */
+async function insert(req, res, next) {
+  try {
+
+
+  } catch (err) {
+    console.log("function insert err =>", err);
+    return res.json({
+      status: "error",
+      message: "server err",
+    });
+  }
+}
+
+
+/**
+ * Update one data by id 
+ * @param {object} req => get all data from request 
+ * @param {object} res => return value to user
+ * @param {object} next => return next argument
+ * @returns json 
+ */
+async function update(req, res, next) {
+  try {
+
+
+  } catch (err) {
+    console.log("function update err =>", err);
+    return res.json({
+      status: "error",
+      message: "server err",
+    });
+  }
+}
+
+/**
+ * DELETE one data by id 
+ * @param {object} req => get all data from request 
+ * @param {object} res => return value to user
+ * @param {object} next => return next argument
+ * @returns json 
+ */
+async function destroy(req, res, next) {
+  try {
+
+    
+  } catch (err) {
+    console.log("function destroy err =>", err);
+    return res.json({
+      status: "error",
+      message: "server err",
+    });
+  }
+}
+
+
+module.exports={getAll,getOne,insert,update,destroy};
