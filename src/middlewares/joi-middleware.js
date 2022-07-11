@@ -1,8 +1,9 @@
-const { register ,login} = require("../schema/auth");
+const { register ,login,update} = require("../schema/auth");
 const transaction= require("../schema/transaction");
 const book = require("../schema/book");
 
 const joiShema={
+    update:update,
     register:register,
     transaction:transaction,
     login:login,
@@ -13,6 +14,7 @@ const joiShema={
 function joi(schema){
 // console.log(joi);
     return async(req, res, next)=>{
+        // console.log(req.body);
         if(schema in joiShema === false)  return res.json({status: 'error', message: ` schema "${schema}" not found` });
          try {
              const value = joiShema[schema].validate(req.body);

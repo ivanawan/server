@@ -1,3 +1,5 @@
+
+const sequelize = require("../../config/db_connection");
 const { Book, PurchasesBook } = require("../../models");
 
 /**
@@ -26,6 +28,32 @@ const { Book, PurchasesBook } = require("../../models");
     }
   }
   
+  /**
+ * GET all data random limit 10
+ * @param {object} req => get all data from request 
+ * @param {object} res => return value to user
+ * @param {object} next => return next argument
+ * @returns json 
+ */
+ async function getPromoBook(req, res, next) {
+  try {
+      const promoBooks= await Book.findAll({order: sequelize.literal('rand()'),limit:10});
+      return res.json({
+          status: "success",
+          data:{
+            promoBooks
+          }
+        });
+
+  } catch (err) {
+    console.log("function getAll err =>", err);
+    return res.json({
+      status: "error",
+      message: "server err",
+    });
+  }
+}
+
   /**
    * GET one data by id
    * @param {object} req => get all data from request 
@@ -80,6 +108,8 @@ const { Book, PurchasesBook } = require("../../models");
       });
     }
   }
+
+
   
   
   async function download(req,res,next){
@@ -144,4 +174,4 @@ const { Book, PurchasesBook } = require("../../models");
   }
   
   
-  module.exports={getAll,getOne,insert,update,destroy,download};
+  module.exports={getAll,getOne,insert,update,destroy,download,getPromoBook};

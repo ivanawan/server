@@ -56,7 +56,7 @@ exports.uploadImage = (imageFile) => {
       //   })
       // }
 
-      console.log(req.body,req.file);
+      // console.log(req.body,req.file);
 
       // Limit
       if(err){

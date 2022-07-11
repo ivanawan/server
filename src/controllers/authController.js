@@ -92,6 +92,26 @@ async function register(req, res, next) {
   }
 }
 
+async function updateProfile(req,res,next){
+  try {
+    const data =req.body;
+    data.avatar=req.file.filename;
+    const user = await User.update(data,{where:{id:req.user.id} });
+
+     return res.json({
+       status: "success",
+       data: user,
+     });
+ 
+   } catch (err) {
+     console.log("function update err =>", err);
+     return res.json({
+       status: "error",
+       message: "server err",
+     });
+   }
+}
+
 async function getProfile(req,res,next){
   try {
    const Profil = await User.findOne({where:{id:req.user.id}, 
@@ -113,18 +133,6 @@ async function getProfile(req,res,next){
 }
 
 
-async function update(req, res, next) {
-  try {
-    
-
-  } catch (err) {
-    console.log("function update err =>", err);
-    return res.json({
-      status: "error",
-      message: "server err",
-    });
-  }
-}
 
 /**
  * to generate token jwt
@@ -138,4 +146,4 @@ async function update(req, res, next) {
   );
 }
 
-module.exports = { update,login,register ,getProfile};
+module.exports = { login,register ,getProfile,updateProfile};

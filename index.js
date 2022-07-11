@@ -42,15 +42,16 @@ httpServer.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
 app.get('/', (req, res) =>{res.send('Hello finaltask api v.1.00 !')});
-app.use('/',index_route);
+app.use('/api/v1',index_route);
 
 
 /**
  *    +++++++++++++++   Socket IO    +++++++++++++++
  */ 
 
+ require('./src/socket/index')(io)
 
-
+ 
 /**
  *    +++++++++++++++   db connection     +++++++++++++++
  */ 
@@ -63,7 +64,7 @@ app.use('/',index_route);
        /**
        * Syncronize the Post model.
        */
-      await sequelize.sync();
+      // await sequelize.sync();
       // await PurchasesBook.sync({force:true});
     } catch (error) {
       console.error('Unable to connect to the database:', error);
