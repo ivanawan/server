@@ -37,7 +37,10 @@ const { Book, PurchasesBook } = require("../../models");
  */
  async function getPromoBook(req, res, next) {
   try {
-      const promoBooks= await Book.findAll({order: sequelize.literal('rand()'),limit:10});
+      const promoBooks = await Book.findAll({
+        order: sequelize.literal("rand()"),
+        limit: 3,
+      });
       return res.json({
           status: "success",
           data:{
